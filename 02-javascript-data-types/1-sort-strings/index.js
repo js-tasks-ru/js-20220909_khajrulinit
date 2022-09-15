@@ -9,34 +9,11 @@ export function sortStrings(arr, param = 'asc') {
     if (param !== 'asc' && param !== 'desc') {
         return newArr;
     }
-    let r, uca, ucb, ucr;
     return newArr.sort(function(a, b) {
-        uca = a.toUpperCase();
-        ucb = b.toUpperCase();
         if (param == 'asc') { 
-            ucr = uca.localeCompare(ucb);
-            r = a.localeCompare(b);
-            if (ucr === r) {
-                return r;
-            }
-            if (a[0].toUpperCase()==a[0]) {
-                return -1;
-            }
-            if (b[0].toUpperCase()==b[0]) {
-                return 1;
-            }
+            return a.localeCompare(b, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
         } else if (param == 'desc') {
-            ucr = ucb.localeCompare(uca);
-            r = b.localeCompare(a);
-            if (ucr === r) {
-                return r;
-            }
-            if (a[0].toUpperCase()==a[0]) {
-                return 1;
-            }
-            if (b[0].toUpperCase()==b[0]) {
-                return -1;
-            }
+            return b.localeCompare(a, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
         }
     });
 }
