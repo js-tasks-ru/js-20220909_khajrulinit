@@ -7,14 +7,17 @@
 export function sortStrings(arr, param = 'asc') {
     const copyArr = [...arr];
     if (param !== 'asc' && param !== 'desc') {
-        return copyArr;
+        throw new Error('Unknown direction');
     }
-    const props = [['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' }];
     return copyArr.sort(function(a, b) {
         if (param == 'asc') { 
-            return a.localeCompare(b, ...props);
+            return compare(a, b);
         } else if (param == 'desc') {
-            return b.localeCompare(a, ...props);
+            return compare(b, a);
         }
     });
+}
+
+const compare = (a, b) => {
+    return a.localeCompare(b, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
 }
