@@ -5,15 +5,16 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-    let newArr = arr.slice(0);
+    const copyArr = [...arr];
     if (param !== 'asc' && param !== 'desc') {
-        return newArr;
+        return copyArr;
     }
-    return newArr.sort(function(a, b) {
+    const props = [['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' }];
+    return copyArr.sort(function(a, b) {
         if (param == 'asc') { 
-            return a.localeCompare(b, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
+            return a.localeCompare(b, ...props);
         } else if (param == 'desc') {
-            return b.localeCompare(a, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
+            return b.localeCompare(a, ...props);
         }
     });
 }
