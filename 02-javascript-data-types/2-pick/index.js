@@ -7,7 +7,7 @@
 export const pick = (obj, ...fields) => {
     const newObj = {};
     fields.forEach(element => {
-        if ( Object.hasOwn(obj, element) ) {
+        if ( obj.hasOwnProperty(element) ) {
             newObj[element] = obj[element];
         }
     });
