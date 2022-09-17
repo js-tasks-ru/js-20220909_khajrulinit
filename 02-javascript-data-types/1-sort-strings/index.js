@@ -5,5 +5,19 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
+    const copyArr = [...arr];
+    if (param !== 'asc' && param !== 'desc') {
+        throw new Error('Unknown direction');
+    }
+    return copyArr.sort(function(a, b) {
+        if (param == 'asc') { 
+            return compare(a, b);
+        } else if (param == 'desc') {
+            return compare(b, a);
+        }
+    });
+}
 
+const compare = (a, b) => {
+    return a.localeCompare(b, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
 }
