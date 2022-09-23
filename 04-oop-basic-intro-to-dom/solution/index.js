@@ -59,6 +59,18 @@ export default class ColumnChart {
         this.subElements.body.innerHTML = this.getChartColumns();
     }
     
+    destroy() {
+        this.remove();
+        this.element = null;
+        this.subElements = {};
+    }
+    
+    remove() {
+        if (this.element) {
+            this.element.remove();
+        }
+    }
+    
     render() {
         const div = document.createElement('div');
         
